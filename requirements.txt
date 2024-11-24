@@ -1,0 +1,7 @@
+Flask
+pandas
+transformers
+datasets
+scikit-learn
+torch
+python-dotenv
