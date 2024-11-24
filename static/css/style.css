@@ -1,0 +1,36 @@
+body {
+    background-color: #f4f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.jumbotron {
+    border-radius: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#generate, #retrain {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#generatedTweet {
+    min-height: 100px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-style: italic;
+}
+
+#retrainStatus {
+    min-height: 100px;
+    padding: 20px;
+    background-color: #e9f7ef;
+    border: 1px solid #ddd;
+}
+
+footer{
+    background-color: #2e1d1d;
+    font-family: 'Arial', sans-serif;
+}
