@@ -18,10 +18,34 @@
             color: white;
             padding: 80px 0;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInHeader 1s ease-in-out;
+        }
+
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header h1 {
             font-size: 3rem;
+            animation: fadeInText 1.5s ease-out;
+        }
+
+        @keyframes fadeInText {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .container {
@@ -35,6 +59,23 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInForm 1s ease-in-out;
+        }
+
+        @keyframes fadeInForm {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
         }
 
         .btn-success {
@@ -43,9 +84,13 @@
             transition: transform 0.2s, background-color 0.3s ease;
         }
 
-        .btn-success:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
+        .btn-success:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .btn-success:active {
+            transform: scale(0.98);
         }
 
         footer {
@@ -57,6 +102,18 @@
         #statusMessage {
             font-size: 1.2rem;
             font-weight: bold;
+            animation: fadeInStatus 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInStatus {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -73,7 +130,7 @@
                 <label for="file">Select CSV File:</label>
                 <input type="file" id="file" name="file" accept=".csv" class="form-control-file" required>
             </div>
-            <button type="submit" id="retrainButton" class="btn btn-success btn-lg mt-3">Retrain Model</button>
+            <button type="submit" class="btn btn-success btn-lg mt-3">Retrain Model</button>
         </form>
         <p id="statusMessage" class="text-center mt-4"></p>
     </section>
@@ -82,39 +139,29 @@
         <p>&copy; 2024 Tweet Generation API. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
     <script>
         document.getElementById("retrainForm").addEventListener("submit", async function(e) {
             e.preventDefault();
-
-            const retrainButton = document.getElementById("retrainButton");
-            const statusMessage = document.getElementById("statusMessage");
-            retrainButton.disabled = true; // Disable the button
-            statusMessage.style.color = "blue";
-            statusMessage.innerText = "Training in progress. Please wait...";
-
             const formData = new FormData();
             formData.append("file", document.getElementById("file").files[0]);
 
-            try {
-                const response = await fetch("/retrain", {
-                    method: "POST",
-                    body: formData
-                });
+            const response = await fetch("/retrain", {
+                method: "POST",
+                body: formData
+            });
 
-                const data = await response.json();
+            const data = await response.json();
+            const statusMessage = document.getElementById("statusMessage");
 
-                if (response.ok) {
-                    statusMessage.style.color = "green";
-                    statusMessage.innerText = data.message || 'Model retrained successfully!';
-                } else {
-                    statusMessage.style.color = "red";
-                    statusMessage.innerText = data.error || 'Error retraining the model!';
-                }
-            } catch (error) {
+            if (response.ok) {
+                statusMessage.style.color = "green";
+                statusMessage.innerText = data.message || 'Model retrained successfully!';
+            } else {
                 statusMessage.style.color = "red";
-                statusMessage.innerText = "An unexpected error occurred.";
-            } finally {
-                retrainButton.disabled = false; // Enable the button after training is done
+                statusMessage.innerText = data.error || 'Error retraining the model!';
             }
         });
     </script>

@@ -9,17 +9,16 @@ LOGGING_DIR = os.getenv('LOGGING_DIR', 'app/logs')
 
 TRAINING_ARGS = {
     'output_dir': './retrained_results',
-    'num_train_epochs': 3,
-    'per_device_train_batch_size': 8,
-    'save_steps': 1000,
+    'num_train_epochs': 1,
+    'per_device_train_batch_size': 16,
+    'save_steps': 5000,
     'save_total_limit': 3,
     'logging_dir': './logs',
-    'logging_steps': 20,
-    'evaluation_strategy': "steps",
-    'eval_steps': 500,
-    'gradient_accumulation_steps': 4,
+    'logging_steps': 100,
+    'evaluation_strategy': "no",
+    'gradient_accumulation_steps': 1,
     'learning_rate': 5e-5,
-    'warmup_steps': 500,
+    'warmup_steps': 100,
     'warmup_ratio': 0.1,
     'weight_decay': 0.01,
     'fp16': True,
@@ -36,4 +35,6 @@ TRAINING_ARGS = {
     'local_rank': -1,
     'seed': 42,
     'report_to': "none",
+    'gradient_checkpointing': True,  # Optional: use if large model and memory issues
 }
+
