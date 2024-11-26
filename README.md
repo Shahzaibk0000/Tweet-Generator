@@ -1,11 +1,11 @@
 
 # Tweet Generation Project
 
-This project is a **Flask-based API** for generating and retraining tweets using a fine-tuned **GPT-2 model**. The API allows users to upload a dataset for retraining the model and generate tweets.
+This project is a **Flask-based API** for generating and retraining tweets using a fine-tuned. The API allows users to upload a dataset for retraining the model and generate tweets.
 
 ## Features
 
-- **Retrain Model**: Upload a dataset of tweets to fine-tune the GPT-2 model on your data.
+- **Retrain Model**: Upload a dataset of tweets to fine-tune the model on your data.
 - **Generate Tweets**: Generate tweets with a customizable prompt using the fine-tuned model.
 
 ## Requirements
